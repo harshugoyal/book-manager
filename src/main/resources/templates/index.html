@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Manager</title>
+</head>
+<body>
+
+<h1>Book Manager</h1>
+
+<a href="/add">Add New Book</a>
+
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Price</th>
+    </tr>
+
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.price}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
