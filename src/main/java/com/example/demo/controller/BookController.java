@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 
 @Controller
@@ -24,7 +24,6 @@ public class BookController {
         return "index";
     }
 
-
     @GetMapping("/add")
     public String addBookPage(Model model) {
     model.addAttribute("book", new Book());
@@ -34,6 +33,12 @@ public class BookController {
     @PostMapping("/save")
     public String saveBook(@ModelAttribute Book book) {
     brp.save(book);
+    return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable int id){
+    brp.deleteById(id);
     return "redirect:/";
     }
     
