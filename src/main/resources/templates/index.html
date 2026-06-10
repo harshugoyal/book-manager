@@ -17,6 +17,7 @@
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
+        <th>Edit</th>
         <th>Delete</th>
     </tr>
 
@@ -25,6 +26,11 @@
         <td th:text="${book.name}"></td>
         <td th:text="${book.author}"></td>
         <td th:text="${book.price}"></td>
+        <td>
+        <a th:href="@{/edit/{id}(id=${book.id})}">
+        Edit
+        </a>
+        </td>
         <td>
         <a th:href="@{/delete/{id}(id=${book.id})}">
         Delete

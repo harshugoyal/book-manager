@@ -42,4 +42,11 @@ public class BookController {
     return "redirect:/";
     }
     
+    @GetMapping("/edit/{id}")
+    public String editBook(@PathVariable int id, Model model){
+    Book book = brp.findById(id).orElse(null);
+    model.addAttribute("book", book);
+    return "addbook";
+    }
+    
 }
