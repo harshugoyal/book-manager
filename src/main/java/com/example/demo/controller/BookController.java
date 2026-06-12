@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 
 
 
@@ -31,7 +36,10 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute Book book) {
+    public String saveBook(@Valid @ModelAttribute Book book,BindingResult result) {
+    if(result.hasErrors()) {
+        return "addbook";
+    }
     brp.save(book);
     return "redirect:/";
     }
@@ -47,6 +55,15 @@ public class BookController {
     Book book = brp.findById(id).orElse(null);
     model.addAttribute("book", book);
     return "addbook";
+    }
+
+    @GetMapping("/search")
+    public String searchBook(@RequestParam String keyword,Model model) {
+    model.addAttribute(
+            "books",
+            brp.findByNameContainingIgnoreCase(keyword)
+    );
+    return "index";
     }
     
 }
